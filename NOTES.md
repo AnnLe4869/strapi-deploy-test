@@ -23,6 +23,7 @@ Note that we use port `1337` on the `localhost`
 - You can think of `COLLECTION TYPES` as a **Schema** or a JavaScript class. `COLLECTION TYPES` define a shape a data of this type must have (like a User type must have property `username` as text, `email` as email, etc.), and base on this type we create data accordingly.
 
 - `Component` is a group of fields that we can reuse on the `COLLECTION TYPES`
+- `Single Type` is the type where we only have **ONE INSTANCE** of the type (in comparison, `COLLECTION TYPES` can have multiple instances)
 
 ## Field settings
 
@@ -36,3 +37,37 @@ Note that we use port `1337` on the `localhost`
 ## Adding new data based off the collection
 
 On `Collection Types` select the type you want to create data based upon (i.e what type of shape your data should have) and hit `Add new Category`
+
+## Permission
+
+[User role and Permission doc](https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html)
+
+By default, no one can access the data from our Strapi app even it is from the local machine the Strapi is on (which mean `localhost:1337/products` is not gonna work)
+
+---> We need to change the permission in `Roles and Permissions`, which usually can be found the Settings
+
+We change the permissions in the `Roles` (the one that have Authenticated and Public) and change some settings here. In specific, what can a user do if they are public vs Authenticated
+
+## API Endpoints
+
+[API Endpoint doc](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#endpoints)
+
+We can perform API request to get the data from Strapi server. Syntax
+
+- `GET http://localhost:1337/<collection_type>` to get the list of entries of that of the `<collection_type>`
+- `GET http://localhost:1337/<collection_type>/count` to get the count of entries matching the query filter
+- `GET http://localhost:1337/<collection_type>/<id>` to get the a specific object of the type
+
+- `POST http://localhost:1337/<collection_type>` to create a new entries and returns its value
+
+- `PUT http://localhost:1337/<collection_type>/<id>` to update an entry
+
+- `DELETE http://localhost:1337/<collection_type>/<id>` to delete an entry
+
+## API Parameters
+
+[API Parameter doc](https://strapi.io/documentation/developer-docs/latest/developer-resources/content-api/content-api.html#api-parameters)
+
+We can use additional parameters (the part after `?` in a URL) to perform some query (like filter, sort, limit, locale, etc)
+
+For specific on how to use it, read the document above
