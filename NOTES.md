@@ -1,6 +1,7 @@
 # Strapi
 
 [Quick Start Guide](https://strapi.io/documentation/developer-docs/latest/getting-started/quick-start.html)
+[Brad Video guide](https://www.youtube.com/watch?v=6FnwAbd2SDY)
 
 ## Installation
 
@@ -46,7 +47,9 @@ By default, no one can access the data from our Strapi app even it is from the l
 
 ---> We need to change the permission in `Roles and Permissions`, which usually can be found the Settings
 
-We change the permissions in the `Roles` (the one that have Authenticated and Public) and change some settings here. In specific, what can a user do if they are public vs Authenticated
+We change the permissions in the `Roles` (the one that have Authenticated and Public) and change some settings here. In specific, what can a user do if they are public vs Authenticated.
+
+For `PUT` and `DELETE` we usually want to authenticate an user first and check his role. To create a user we can create one on the `User` collection type and select `Confirmed` field to `true`
 
 ## API Endpoints
 
@@ -71,3 +74,11 @@ We can perform API request to get the data from Strapi server. Syntax
 We can use additional parameters (the part after `?` in a URL) to perform some query (like filter, sort, limit, locale, etc)
 
 For specific on how to use it, read the document above
+
+## Overwrite the method
+
+[Document on the customization](https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#routing)
+
+We can customize the behavior of some method like `find` or `put`, or do something before saving into database, etc.
+
+All of this overwrite is in the `/api` folder. Read the document for more information
