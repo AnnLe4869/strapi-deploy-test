@@ -30,5 +30,9 @@ Note that we use port `1337` on the `localhost`
 - **Basic** sets up name and type: either short text or long text (difference is on search ability)
 - **Advance** set up default value, regular expression (what the value can be), is it required field, is it have to be unique, max/min length and _private field_ (this will make the value won't show up on API), etc.
 
-- `Relation` collection type is the type the connect _a field of one type_ to another type (for example, the field `author` of type `Book` should like to type `Person`).
+- `Relation` collection type field is the type the connect _a field of one type_ to another type (for example, the field `author` of type `Book` should like to type `Person`).
 - When select the `Relation` collection type, we need to specify the field name and the relationship (like 1-to-1, 1-to-many, many-to-many, etc.)
+
+## Adding new data based off the collection
+
+On `Collection Types` select the type you want to create data based upon (i.e what type of shape your data should have) and hit `Add new Category`
