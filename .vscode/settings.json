@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["Strapi"]
+  "cSpell.words": [
+    "Postgres",
+    "Strapi",
+    "adduser",
+    "createdb",
+    "createuser",
+    "postgresql",
+    "psql"
+  ]
 }
