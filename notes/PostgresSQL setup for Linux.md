@@ -32,31 +32,36 @@
 
 - **In other words**, we have a Linux account when installing PostgreSQL (namely `postgres`) and when we switch over to this account we can access the PostgreSQL and have all **root privilege** upon it (like create new role, create/delete database, etc.)
 
-## PostgreSQL setup
+## Access to PostgreSQL CLI
 
-- First we need to switch over to the `postgres` Linux account and then run the PostgreSQL CLI
+We need to switch over to the `postgres` Linux account and then run the PostgreSQL CLI
 
-  ```bash
-  # This basically switch the user from current user (i.e root) to postgre
-  sudo -i -u postgres
-  # Then we start the PostgreSQL command line interface as if the postgre user run the command
-  psql
-  ```
+```bash
+# This basically switch the user from current user (i.e root) to postgre
+sudo -i -u postgres
+# Then we start the PostgreSQL command line interface as if the postgre user run the command
+psql
+```
 
-  The `-i` mean run login shell as the target user (in our case it's `postgres`). We can also understand `-i` as "sign in as this user and run the shell as such". Other words, simplified as "change the user to".  
-  The `-u` mean run command (or edit file) as specified user name or ID (in our case it's `postgres`). We can understand this as the command will be run under the specified user. In our case since we didn't specify the command, any command we type after this will be run as if the `postgres` user run it.
+The `-i` mean run login shell as the target user (in our case it's `postgres`). We can also understand `-i` as"sign in as this user and run the shell as such". Other words, simplified as "change the user to".
 
-  Note that `sudo -i` is similar to `su` command in a sense that they all simply entered into another shell as that username; typing exit will leave that shell and return you to your root shell.
+The `-u` mean run command (or edit file) as specified user name or ID (in our case it's `postgres`). We can understand this as the command will be run under the specified user. In our case since we didn't specify the command, any command we type after this will be run as if the `postgres` user run it.
 
-  **ALTERNATIVELY**, we can access the Postgres CLI Without Switching Accounts by running
+Note that `sudo -i` is similar to `su` command in a sense that they all simply entered into another shell as that username; typing exit will leave that shell and return you to your root shell.
 
-  ```bash
-  sudo -u postgres psql
-  ```
+**ALTERNATIVELY**, we can access the Postgres CLI Without Switching Accounts by running
 
-  ---> Switching to `postgres` is better since the user `postgres` has **SUPERUSER** privilege and it's more convenient to work with PostgreSQL with this user than using `root` and keep having to do `sudo -u postgres <command>`
+```bash
+sudo -u postgres psql
+```
 
-- Second, we set up the role. If we already signed in as `postgres` then we do `createuser --interactive`.  
+---> Switching to `postgres` is better since the user `postgres` has **SUPERUSER** privilege and it's more convenient to work with PostgreSQL with this user than using `root` and keep having to do `sudo -u postgres<command>`
+
+## Setting up role
+
+- Reason is that we want to have multiple users that can use PostgreSQL and not just `postgres` user
+
+- HOW-TO: If we already signed in as `postgres` then we do `createuser --interactive`.  
   If not (i.e signed in as root) we do `sudo -u postgres createuser --interactive`.  
   After that we will be prompt to enter the role's name and its privilege (whether it's superuser or not)
 
@@ -65,10 +70,15 @@
 ## Create new database
 
 - Another assumption that the Postgres authentication system makes by default is that for any role used to log in, that role will have a **database with the same name** which it can access.  
-  ---> Meaning that, a role `timmy` will have a database named `timmy` which it can access to.
+  ---> Meaning that, a role `timmy` ~~~will have a database named `timmy` which it can access to~~~.
 
-- Only when you are logged in as `postgres` you can create new database.
-- When you logged in as `postgres` you can create new database by running `createdb <database_name>`  
+  **NO** a new role when created **DO NOT AUTOMATICALLY HAVE A DATABASE OF ITS NAME**. We have to manually create a database of that name.
+
+- Only when you are ~~~logged in as `postgres` you can create new database~~~.
+
+  ---> **NO** as long as the role is allowed to create new database you can do that using that role.
+
+- When the role allowed for create new database, you can create new database by running `createdb <database_name>`  
   For example, `createdb my_new_database`
 
 ## Opening a Postgres Prompt with the New Role
@@ -80,5 +90,3 @@
 
 - To log in with ident based authentication, you’ll need a Linux user with the same name as your Postgres role and database. In other words, to log in as `sammy` role of PostgresSQL, you need also be log in as `sammy` user of Linux machine.  
   ---> This means, a user can log in to PostgreSQL as a role of same name. This is how a non-root user can log into the PostgresSQL and access a database. If this is a non-root role, this role can be limited (for example, cannot create new database, cannot create new user, etc.)
-
-## Connect to PostgreSQL with Strapi
