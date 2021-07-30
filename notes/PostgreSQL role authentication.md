@@ -17,4 +17,4 @@ This sounds strange but since each username within a Linux machine is unique and
 
 But this pose a problem: can Linux user "tim" use the role "john"?
 
-Yes we can by changing the authentication method from **INDENT** to **PASSWORD BASED**. Usually do this only for external connection to database like for Strapi to connect to database
+Yes we can by changing the authentication method from **INDENT** to **PASSWORD BASED**. Usually do this only for external connection to database like for Strapi to connect to database. Since Strapi cannot choose what Linux user it is signed in as, it can only choose what PostgreSQL role it wants to be. Thus there is a need for role-authentication by password. In out Strapi case, we need the database name (the name we use when run `createdb <database_name>`), role name (when we do `createuser`) and role password (which we set using `ALTER USER`)
