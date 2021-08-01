@@ -9,7 +9,7 @@ Index
 
 2. [How to set up a PostgreSQL database in remote Linux machine](/notes/PostgresSQL%20setup%20for%20Linux.md)
 
-   This includes how to install and use Git and push to GitHub from remote access using SSH, install and config PostgreSQL
+   This includes how to install and use Git and push to GitHub from remote access using SSH, install and config PostgreSQL. Also instructions on how to install node via nvm
 
 3. [Role authentication for PostgreSQL](/notes/PostgreSQL%20role%20authentication.md)
 

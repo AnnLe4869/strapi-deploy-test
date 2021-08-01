@@ -10,6 +10,7 @@
 
 ## Install `nodejs`
 
+- We should install `nvm` instead of just nodejs since it provides more utilities. [Guide to nvm](https://github.com/nvm-sh/nvm)
 - We will need to change the npm default directory (i.e where the package we install globally is stored)
 - After that, nothing much
 
