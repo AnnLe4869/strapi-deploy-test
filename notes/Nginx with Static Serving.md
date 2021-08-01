@@ -138,7 +138,7 @@
           index index.html;
        }
 
-       location /about {
+       location /about/ {
           try_files $uri $uri/ =404;
           root /var/www/our-static-files/html;
           index about.html;

@@ -8,6 +8,8 @@
     "createuser",
     "postgresql",
     "psql",
-    "strapiuser"
+    "respawn",
+    "strapiuser",
+    "unstartup"
   ]
 }
