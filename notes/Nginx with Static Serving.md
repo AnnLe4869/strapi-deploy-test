@@ -176,6 +176,6 @@
 
 ## Conclusions
 
-- Our HTML files can be stored in any directory and not necessary to be in `/var/www` **AS LONG AS** Nginx has the permission to read files in that directory (anecdote is that Nginx cannot read files in `/root` directory)
+- Our HTML files can be stored in any directory and not necessary to be in `/var/www` **AS LONG AS** Nginx has the permission to read files in that directory (anecdote is that Nginx cannot read files in `/root` directory). **HOWEVER** from security perspective, `/root` directory is not a good place to store file and should store those static files in `/var/www` ([Pitfall in config file](https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#not-using-standard-document-root-locations))
 
 - We can server multiple routes in same server (like `/`, `/about`, `/blog`, etc.) and all we need to do is to specify the location and route to the file to serve. Note on how Nginx resolve the file's path
