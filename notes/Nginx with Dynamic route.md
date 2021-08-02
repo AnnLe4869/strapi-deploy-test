@@ -118,3 +118,5 @@ Why don't we need to specify the `/about` route and still be able to access `147
 Because of the way Nginx resolve path. [Read on Nginx document](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass) or [Answer on StackOverflow answer](https://stackoverflow.com/a/62753212/9087143).
 
 In essence, it will take the path define in `location` and add it to the end of `proxy_pass`. Detail on how this work will vastly depend on how we construct the URI. Note that trailing slash (/) play an important role here as with and without can completely change the resulting route.
+
+Note that in development do remove the `try_files $uri $uri/ =404;` since we want to know what really going on instead of just a 404 page
