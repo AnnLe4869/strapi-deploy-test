@@ -3,6 +3,34 @@
 [Quick start for PM2](https://pm2.keymetrics.io/docs/usage/quick-start/)
 [Set up a Node app for Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04)
 
+## Sample app
+
+In `/root` directory create a new directory named `test-node-server` and in this directory have a file name `app.js` which has content:
+
+```js
+const http = require("http");
+
+const express = require("express");
+
+const hostname = "localhost";
+const port = 8008;
+const app = express();
+
+app.get("/", (req, res) => {
+  console.log("From main page");
+  res.send("Hello world from main page \n");
+});
+
+app.get("/about", (req, res) => {
+  console.log("From /about page");
+  res.send("About page \n");
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
 ## Install PM2 and start the Node app with PM2
 
 Follow the quick start instruction and we are good to go.
@@ -62,6 +90,73 @@ When system shut down or reboot, most of apps, including daemon like PM2 also st
 If we want PM2 to have root privilege on boot, we need to include `systemd` on the command at step 1 like so `pm2 startup systemd`
 
 If we want to stop PM2 from boot at startup, run `pm2 unstartup systemd`
+
+## Configuration files for projects that need `npm start`
+
+[PM2 config](https://pm2.keymetrics.io/docs/usage/application-declaration/)
+
+Imagine having multiple apps that we want to run at the same time but each of these apps has different environment variables, different argument to pass to `pm2 start`, etc. This will be a pain to run each one by one.
+
+---> We can create a Configuration file and in this file, we specify which app need what and use what to run. Imagine this configuration file as a "manager" file. And then when we need to start those apps, we only need to tell PM2 to run this configuration file
+
+We generate a configuration file by running
+
+```bash
+pm2 init
+```
+
+This will create a configuration file named `ecosystem.config.js` that located at the location we are currently at. So if we are at `/var/www`, after running that command we will have `/var/www/ecosystem.config.js`
+
+The `ecosystem.config.js` is of the shape, take our app for example:
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: "strapi", // Name of our process
+      cwd: "/root/test-node-server", // the directory from which PM2 will run the script here
+      script: "npm", // What come next after pm2 start
+      args: "start", // Additional argument
+      env: {
+        NODE_ENV: "production",
+        SERVER_POST: 8008,
+      },
+    },
+  ],
+};
+```
+
+The whole config above when run by PM2 can roughly be translated into (environment variable only available in config file, not in CLI)
+
+```bash
+cd /root/test-node-serve && pm2 start npm --name "strapi" -- start
+```
+
+And the part `pm2 start npm --name "strapi" -- start` can be roughly translated as: hey PM2 start the project by running `npm start`
+
+[Link to Stackoverflow answer on how to run npm start with PM2](https://stackoverflow.com/a/42619477/9087143)
+
+## PM2 configuration file for non-npm needed projects
+
+Same as above except for the `ecosystem.config.js`. We will want the config file to be
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: "app1",
+      script: "app.js",
+      cwd: "/root/test-node-server",
+    },
+  ],
+};
+```
+
+And this script when run will translate to
+
+```bash
+cd /root/test-node-serve && pm2 start app.js --name "app1"
+```
 
 ## CheatSheet
 
