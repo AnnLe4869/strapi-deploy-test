@@ -2,7 +2,7 @@
 
 [Guide for Strapi deployment, though a lot need to be changed or fixed](https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/deployment/hosting-guides/digitalocean.html)
 
-1. Do basic setup for Ubuntu, including
+1. **_Do basic setup for Ubuntu, including_**
 
    - Set up firewall rule, either with `ufw` or DigitalOcean firewall. Be careful not to create any rule conflicts
 
@@ -10,17 +10,17 @@
 
    [Guide on initial server setup on Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
 
-2. Install Git and NodeJS
+2. **_Install Git and NodeJS_**
 
    Follow the instruction on how to install Git and NodeJS in [PostgreSQL basic setup](/notes/PostgreSQL%20basic%20setup.md)
 
-3. Clone the Strapi folder from GitHub
+3. **_Clone the Strapi folder from GitHub_**
 
    Assumed that you already has a working-in-development Strapi app deployed to GitHub, we will clone it in `/root` and name it `strapi-deploy-test`
 
    Thus our app stays in `/root/strapi-deploy-test`
 
-4. Install and set up PostgreSQL
+4. **_Install and set up PostgreSQL_**
 
    See [PostgreSQL basic setup](/notes/PostgreSQL%20basic%20setup.md)
 
@@ -30,7 +30,7 @@
 
    No need to create new Linux user of name "strapi" since we don't intend to use INDENT authentication
 
-5. Setting up PostgreSQL for Strapi
+5. **_Setting up PostgreSQL for Strapi_**
 
    See [PostgreSQl setup for Strapi](/notes/PostgreSQL%20setup%20for%20Strapi.md)
 
@@ -62,7 +62,7 @@
    });
    ```
 
-6. `npm run build` your Strapi app
+6. **_`npm run build` your Strapi app_**
 
    To do this, we need to install all necessary npm package by running `npm install` in the app directory
 
@@ -81,7 +81,7 @@
 
    ---> **Work** now after upgrade our Droplet to 2GB memory
 
-7. Serve the file with `npm start`
+7. **_Serve the file with `npm start`_**
 
    At this step we will have a running Strapi app with both server and database ready to go.
 
@@ -93,7 +93,7 @@
 
    ---> A big step here: our Strapi app is **WORKING**
 
-8. Enable port 1337 (do we have to ???)
+8. **_Enable port 1337 (do we have to ???)_**
 
    DIDN'T DO THIS STEP
 
@@ -101,7 +101,7 @@
 
    If we want to access our Strapi app from external source (like a browser) then we have to enable the port. Just remember to disable the port later.
 
-9. Configure Nginx
+9. **_Configure Nginx_**
 
    We need to config Nginx so that we can access our Strapi app from external browser.
 
@@ -166,7 +166,7 @@
 
    The main reason for error before is due to the default file. Changing the config file only to make it cleaner and remove the unnecessary part
 
-10. Install and Config PM2
+10. **_Install and Config PM2_**
 
     - If you didn't install PM2 before, run `npm install pm2@latest -g`. Let no install `build-essential` package for experiment purpose to see whether we need it or not.
 

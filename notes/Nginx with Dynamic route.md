@@ -2,7 +2,9 @@
 
 ## Node app with more than 2 routes (i.e `/` and `/about`)
 
-1. Set up a basic Node app with 2 or more routes. The file's name is `test-node-server` and content should be as followed:
+1. Set up a basic Node app with 2 or more routes.
+
+   The file's name is `test-node-server` and content should be as followed:
 
    ```js
    const http = require("http");
@@ -71,7 +73,7 @@
 
    ---> Not working. Nothing change.
 
-2. Remove the `/etc/nginx/sites-enabled/default` file and edit the config file `/etc/nginx/sites-enabled/test-node-server-nginx` as followed:
+2. **_REMOVE the `/etc/nginx/sites-enabled/default` file and edit the config file `/etc/nginx/sites-enabled/test-node-server-nginx` as followed_**:
 
    ```bash
    server {
