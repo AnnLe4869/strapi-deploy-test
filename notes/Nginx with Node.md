@@ -14,7 +14,7 @@
 
          server_name 147.182.207.107; # This is our server public IP address
 
-         location / {
+         location / { # Only applied for request to `/` and not for `/admin` or else
                  proxy_pass http://127.0.0.1:8008; # 127.0.0.1 is self-inferred IP address and equivalent to localhost
                  try_files $uri $uri/ =404;
          }
@@ -35,7 +35,7 @@
    This will effectively remove the link file `default` in the directory `sites-enabled`.
    Can use command `rm` instead of `unlink`
 
-   ---> This is **NOT NECESSARY** for our app to run properly
+   ---> ~~This is **NOT NECESSARY** for our app to run properly~~
 
 6. Create a link to our `/etc/nginx/sites-available/test-node-server-nginx` in directory `/etc/nginx/sites-enabled` by running
 
@@ -63,9 +63,13 @@
 
    I tested and it's OK to **NOT UNLINK** the file `/etc/nginx/sites-enabled/default`
 
+   **HOWEVER** we REALLY should do that as per [Stackoverflow answer](https://stackoverflow.com/questions/45660042/nginx-proxy-pass-leads-to-404-not-found-page) and through own experience. It is also unnecessary.
+
 2. Why it doesn't work before?
 
    Probably because several reasons:
 
    - We didn't restart the Nginx server to enable the change.
    - We didn't wait for the change to take effect i.e refresh the browser too fast
+   - We didn't remove the default config file
+   - The route is wrong. Remember the trailing slash (/) is very important
