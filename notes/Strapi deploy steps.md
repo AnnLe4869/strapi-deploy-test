@@ -10,6 +10,10 @@
 
    [Guide on initial server setup on Ubuntu](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
 
+   [Setup public-private key authentication](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/about-ssh)
+
+   [Common error on setup public-private key authentication](https://github.com/AnnLe4869/linode-learning/blob/main/7.7.%20Add%20new%20key%20beside%20id_rsa.md)
+
 2. **_Install Git and NodeJS_**
 
    Follow the instruction on how to install Git and NodeJS in [PostgreSQL basic setup](/notes/PostgreSQL%20basic%20setup.md)
